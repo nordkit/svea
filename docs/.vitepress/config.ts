@@ -62,6 +62,12 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Core Concepts',
+          items: [
+            { text: 'Fluent Builders & Conditionable', link: '/guide/fluent-builders' },
+          ],
+        },
+        {
           text: 'Integrations',
           items: [
             { text: 'Laravel', link: '/guide/laravel' },

@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `docs/guide/fluent-builders.md` — new "Fluent Builders & Conditionable" guide page covering both input styles (named-constructor vs fluent callback), the full method-to-builder mapping table, a worked Checkout example with loops + conditions, and the complete `when()` / `unless()` reference; wired into the sidebar under a new **Core Concepts** section
+- `docs/api/checkout.md` — added "Two ways to build a request" section with full named-constructor and fluent-callback examples side by side, plus a dedicated "Conditional builders — `when()` / `unless()`" subsection
+- `docs/api/admin.md` — expanded "Modify order rows" with explicit fluent-callback examples for `addOrderRow()`, `updateOrderRow()`, and `replaceOrderRows()`; added a new "Conditional builders — `when()` / `unless()`" subsection covering both `AdminOrderRequest` and `AdminOrderRow`
+- `docs/index.md` — new feature tile **"Two ways to build any request"** highlighting the dual input style
+- `docs/guide/quick-start.md` — cross-link to the new fluent builders guide
+
 ## [1.1.0] - 2026-05-08
 
 ### Added

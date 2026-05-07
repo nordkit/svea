@@ -41,7 +41,7 @@ $order->id();      // '12345678'
 $order->snippet(); // '<script>...</script>' — embed in your checkout page
 ```
 
-See the full [Checkout reference](../api/checkout) for the fluent callback style and all optional fields.
+See the full [Checkout reference](../api/checkout) for the fluent callback style and all optional fields, and [Fluent Builders & Conditionable](./fluent-builders) for the full pattern across every API surface.
 
 ## Deliver and credit
 

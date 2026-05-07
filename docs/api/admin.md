@@ -32,13 +32,59 @@ $delivery->creditAmount(9900);
 
 ## Modify order rows
 
+All three row-mutation methods take **fluent callbacks** that build an `AdminOrderRow`:
+
 ```php
-Svea::admin()->order('12345678')->addOrderRow(fn ($row) => $row->name('Extra')->unitPrice(5000)->quantity(100)->vatPercent(2500));
-Svea::admin()->order('12345678')->updateOrderRow(rowId: 101, callback: fn ($row) => $row->unitPrice(4500));
+// Add a new row — returns ['order_row_id' => int, 'task_reference' => string]
+$result = Svea::admin()->order('12345678')->addOrderRow(function (AdminOrderRow $row) {
+    $row->name('Extra item')
+        ->sku('EXTRA-1')
+        ->unitPrice(5000)
+        ->quantity(100)
+        ->vatPercent(2500)
+        ->unit('st');
+});
+
+// Update one row by ID
+Svea::admin()->order('12345678')->updateOrderRow(rowId: 101, callback: function (AdminOrderRow $row) {
+    $row->unitPrice(4500)->name('Updated name');
+});
+
+// Replace ALL rows — pass one callback per replacement row
 Svea::admin()->order('12345678')->replaceOrderRows(
-    fn ($row) => $row->name('Widget')->sku('WGT-1')->unitPrice(9900)->quantity(100)->vatPercent(2500),
+    fn (AdminOrderRow $row) => $row->name('Widget')->sku('WGT-1')->unitPrice(9900)->quantity(100)->vatPercent(2500),
+    fn (AdminOrderRow $row) => $row->name('Shipping')->sku('SHIP')->unitPrice(4900)->quantity(100)->vatPercent(2500),
 );
 ```
+
+`AdminOrderRow` does **not** apply the SDK-level minor-unit conversion that Checkout's `OrderRow` does — pass already-scaled values (`100` = 1 unit, `2500` = 25%).
+
+## Conditional builders — `when()` / `unless()`
+
+`AdminOrderRequest` and `AdminOrderRow` both use the `Conditionable` trait. Inline branching without breaking the chain:
+
+```php
+Svea::admin()
+    ->order($externalOrderId)
+    ->withIdempotencyKey('capture-' . $payment->id)
+    ->when(
+        ! empty($partialRows),
+        fn ($req) => $req->deliver(rows: $partialRows),
+        fn ($req) => $req->deliver(),  // optional else branch
+    );
+
+// Inside row callbacks too
+Svea::admin()->order('12345678')->addOrderRow(fn (AdminOrderRow $row) => $row
+    ->name($item->name)
+    ->unitPrice($item->price)
+    ->quantity(100)
+    ->vatPercent(2500)
+    ->when($item->is_discounted, fn ($r) => $r->discountPercent(1000))
+    ->unless($item->is_taxable, fn ($r) => $r->vatPercent(0))
+);
+```
+
+`when($condition, $then, $else = null)` calls `$then($builder)` if truthy, otherwise the optional `$else($builder)`. `unless()` is the inverse. Both return the builder.
 
 ## Polling tasks
 

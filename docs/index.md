@@ -26,6 +26,9 @@ features:
   - icon: 🎯
     title: Fluent & strict
     details: Final readonly value objects, fluent builders with when() / unless(), typed exceptions, PHPStan level 6, full strict_types — built for PHP 8.2, 8.3, 8.4.
+  - icon: 🪄
+    title: Two ways to build any request
+    details: Pass a fully constructed value object — or a closure that mutates a pre-built builder. Loops, conditionals and composition come for free with the fluent callback style.
   - icon: 🧪
     title: First-class testing
     details: Svea::fake() mirrors Laravel's Http::fake() — assert calls, seed responses, prevent stray requests. Plus full Guzzle MockHandler examples.
