@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- PHP 8.5 promoted from experimental to officially supported — README "At a glance" matrix now lists `8.2, 8.3, 8.4, 8.5`; `docs/index.md` feature tile updated; `.github/workflows/tests.yml` matrix simplified (8.5 added inline alongside 8.3/8.4, dropping the `include:` block, `experimental: true` flag, and `continue-on-error` guard — failures on 8.5 now block the build like any other version)
+
 ### Added
 - `docs/guide/fluent-builders.md` — new "Fluent Builders & Conditionable" guide page covering both input styles (named-constructor vs fluent callback), the full method-to-builder mapping table, a worked Checkout example with loops + conditions, and the complete `when()` / `unless()` reference; wired into the sidebar under a new **Core Concepts** section
 - `docs/api/checkout.md` — added "Two ways to build a request" section with full named-constructor and fluent-callback examples side by side, plus a dedicated "Conditional builders — `when()` / `unless()`" subsection

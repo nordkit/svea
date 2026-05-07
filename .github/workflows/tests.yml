@@ -15,14 +15,10 @@ jobs:
 
     strategy:
       matrix:
-        php: ["8.3", "8.4"]
-        include:
-          - php: "8.5"
-            experimental: true
+        php: ["8.3", "8.4", "8.5"]
       fail-fast: false
 
     name: PHP ${{ matrix.php }} — nordkit/svea
-    continue-on-error: ${{ matrix.experimental || false }}
 
     steps:
       - name: Checkout

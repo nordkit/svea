@@ -30,7 +30,7 @@ A ground-up PHP SDK for Svea's APIs: **Checkout**, **Payment Admin**, **Webhook 
 | **Conditionable** — `when()` / `unless()` for fluent branching | ✅ |
 | **Typed exceptions** — `SveaApiException` hierarchy with status code & body | ✅ |
 | **Strict types & `final readonly` value objects** — PHPStan level 6, zero errors | ✅ |
-| **PHP support** — 8.2, 8.3, 8.4 (8.5 experimental) | ✅ |
+| **PHP support** — 8.2, 8.3, 8.4, 8.5 | ✅ |
 | **Framework-agnostic core** — Laravel optional, runs anywhere | ✅ |
 
 ---

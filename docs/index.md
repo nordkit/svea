@@ -25,7 +25,7 @@ features:
     details: Checkout, Payment Admin (deliver, cancel, credit), Webhook Subscriptions, and inbound webhook verification — all four Svea API surfaces in one package.
   - icon: 🎯
     title: Fluent & strict
-    details: Final readonly value objects, fluent builders with when() / unless(), typed exceptions, PHPStan level 6, full strict_types — built for PHP 8.2, 8.3, 8.4.
+    details: Final readonly value objects, fluent builders with when() / unless(), typed exceptions, PHPStan level 6, full strict_types — built for PHP 8.2, 8.3, 8.4, 8.5.
   - icon: 🪄
     title: Two ways to build any request
     details: Pass a fully constructed value object — or a closure that mutates a pre-built builder. Loops, conditionals and composition come for free with the fluent callback style.
