@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-05-07
+
 ### Added
 - PHPStan static analysis at level 6 — `phpstan/phpstan ^2.1` added to `require-dev`; `phpstan.neon` configured to analyse `src/` (excluding `src/Laravel/`); zero errors at level 6
 - PHPStan job added to `tests.yml` CI workflow (runs on PHP 8.2, `--memory-limit=512M`); automatically included in the Release workflow via `workflow_call`
@@ -165,7 +167,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `EventType` enum — confirmed all 10 cases against Svea API docs; enriched class-level PHPDoc with doc link
 - README — corrected assertion method names (`assertSubscriptionRegistered`, added all new assertions), fixed stale `EventType::PaymentDelivered` references in webhook example, added `isVerified()` to subscription accessor docs, closed resolved open questions for base URLs and EventType list
 
-## [1.0.0] - 2026-04-20
 
 ### Added
 - `SveaClient` — main entry point; lazily resolves `CheckoutService`, `AdminService`, `SubscriptionService`, and `WebhookService`
