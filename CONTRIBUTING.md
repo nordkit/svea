@@ -98,8 +98,11 @@ src/
     Conditionable.php             ← tiny custom trait, no illuminate
   Laravel/
     SveaServiceProvider.php       ← illuminate/support only
-    Svea.php                      ← facade
-  Checkout/   Admin/   Subscriptions/   Webhooks/   Transport/   Exceptions/   Testing/
+    Svea.php                      ← facade (+ static assertXxx() proxies)
+    WebhookService.php            ← Illuminate\Http\Request bridge
+    Events/
+      SveaWebhookReceived.php     ← dispatchable event
+  Checkout/   Admin/   Contracts/   Subscriptions/   Webhooks/   Transport/   Exceptions/   Testing/
 ```
 
 ### Root namespace
@@ -189,7 +192,8 @@ The trade-off: required fields are now documented only in PHPDoc, not enforced b
         "orchestra/testbench": "^10.0",
         "pestphp/pest": "^4.0",
         "pestphp/pest-plugin-laravel": "^4.0",
-        "laravel/pint": "^1.0"
+        "laravel/pint": "^1.0",
+        "phpstan/phpstan": "^2.1"
     },
     "suggest": {
         "illuminate/support": "Required for the Laravel facade and service provider"
@@ -570,5 +574,5 @@ $svea = new \Svea\SveaClient(
 | 9 | `FakeSveaClient` + `SveaFakeAssertions` + `preventStrayRequests()` | ✅ |
 | 10 | `SveaClient` service properties + `SveaServiceProvider` + `Svea` facade | ✅ |
 | 10a | Decouple core from Laravel — `src/Support/Conditionable`, `src/Laravel/`, PSR-7 webhook | ✅ |
-| 11 | Full Pest suite — Unit + Integration (Guzzle `HandlerStack` stubs) | ✅ Unit (188 tests) / ✅ Integration (directory scaffolded) |
+| 11 | Full Pest suite — Unit + Integration (Guzzle `HandlerStack` stubs) | ✅ Unit (188 tests) — integration tests use `MockHandler` inline (no separate directory) |
 | 12 | Extract to standalone GitHub repo + Packagist | 🔲 |

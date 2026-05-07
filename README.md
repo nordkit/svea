@@ -939,93 +939,22 @@ $order->getLastResponse()->body;       // string
 ## Package Structure
 
 ```
-packages/svea/
-├── README.md
-├── CONTRIBUTING.md
-├── composer.json
-├── config/
-│   └── svea.php
-└── src/
-    ├── SveaClient.php                        # new SveaClient([...]) — lazy service properties
-    ├── SveaResource.php                      # base response class: ArrayAccess, magic __get, getLastResponse()
-    ├── SveaServiceProvider.php               # auto-discovered; reads config, binds SveaClient singleton
-    │
-    ├── Support/
-    │   └── Conditionable.php                 # custom when()/unless() trait — zero framework deps
-    │
-    ├── Laravel/
-    │   ├── SveaServiceProvider.php           # illuminate/support — binds SveaClient singleton, publishes config
-    │   ├── Svea.php                          # facade → SveaClient; static assertXxx() proxies for testing
-    │   ├── WebhookService.php                # Illuminate\Http\Request → Webhook::constructEvent() bridge
-    │   └── Events/
-    │       └── SveaWebhookReceived.php       # dispatchable event wrapping WebhookEvent
-    │
-    ├── Transport/
-    │   ├── SveaConnector.php                 # Guzzle client, HMAC-SHA512 auth, env-aware base URLs
-    │   ├── SveaResponse.php                  # wraps PSR-7 response, exposed via getLastResponse()
-    │   └── RetryMiddleware.php               # exponential backoff + jitter on 429/500/503/ConnectionException
-    │
-    ├── Checkout/
-    │   ├── CheckoutService.php               # create(), get(), update(), cancel()
-    │   ├── CheckoutOrder.php                 # fluent builder (all-optional constructor + make() factory; Conditionable)
-    │   ├── Cart.php
-    │   ├── OrderRow.php                      # fluent row builder (all-optional constructor + make() factory)
-    │   ├── MerchantSettings.php              # fluent settings builder (all-optional constructor + make() factory)
-    │   ├── PresetValue.php                   # pre-fill checkout fields
-    │   ├── IdentityFlags.php                 # hide/show identity UI elements
-    │   ├── ShippingInformation.php           # shipping checkout config
-    │   ├── FallbackOption.php                # fallback shipping option (id, carrier, name, price, shippingFee)
-    │   ├── Validation.php                    # order validation rules (e.g. minAge)
-    │   └── CheckoutResponse.php              # ->id(), ->snippet(), ->status(), ->successful()
-    │
-    ├── Admin/
-    │   ├── AdminService.php                  # ->order(id) → AdminOrderRequest | ->task(url) → TaskResponse
-    │   ├── AdminOrderRequest.php             # ->get(), ->deliver(), ->cancel(), ->delivery(id), ->addOrderRow(), ->updateOrderRow(), ->replaceOrderRows(), ->withIdempotencyKey()
-    │   ├── AdminDeliveryRequest.php          # ->credit()->rows()->send(), ->creditAmount()
-    │   ├── CreditRequest.php                 # fluent credit builder
-    │   ├── AdminOrderRow.php                 # fluent row builder (all-optional constructor + make() factory)
-    │   ├── AdminOrderResponse.php            # ->status() (enum), ->canDeliver/Credit/Cancel(), ->deliveries(), ->delivery(id), ->deliveryRowIds(id), ->hasAction(), ->hasStatus()
-    │   ├── DeliverResponse.php               # ->deliveryId(), ->taskReference()
-    │   ├── SveaOrderStatus.php               # enum
-    │   └── TaskResponse.php                  # ->reference(), ->completed(), ->failed(), ->resource()
-    │
-    ├── Subscriptions/
-    │   ├── SubscriptionService.php           # ->add(), ->list(), ->get(), ->update(), ->remove(), ->verify()
-    │   ├── SubscriptionBuilder.php           # ->on()->notifyAt()->register()
-    │   ├── Subscription.php                  # ->id(), ->events(), ->callbackUrl(), ->createdAt(), ->isVerified()
-    │   └── EventType.php                     # enum — Svea subscription event types
-    │
-    ├── Webhooks/
-    │   ├── Webhook.php                       # static constructEvent() — pure static, no framework deps
-    │   ├── WebhookService.php                # ->fromRequest(RequestInterface) — PSR-7 aware
-    │   ├── WebhookEvent.php                  # ->type(), ->orderId(), ->deliveryId(), ->occurredAt()
-    │   └── SignatureVerifier.php             # pure HMAC logic — fully unit-testable
-    │
-    ├── Contracts/
-    │   ├── AdminServiceInterface.php
-    │   ├── CheckoutServiceInterface.php
-    │   └── SubscriptionServiceInterface.php
-    │
-    ├── Testing/
-    │   ├── FakeSveaClient.php                # activated by Svea::fake()
-    │   ├── FakeCheckoutService.php
-    │   ├── FakeAdminService.php
-    │   ├── FakeAdminOrderRequest.php
-    │   ├── FakeAdminDeliveryRequest.php
-    │   ├── FakeCreditRequest.php
-    │   ├── FakeSubscriptionService.php
-    │   └── SveaFakeAssertions.php            # assertDelivered(), assertCredited(), assertNothingSent(), etc.
-    │
-    └── Exceptions/
-        ├── SveaException.php
-        ├── SveaApiException.php
-        ├── SveaAuthenticationException.php
-        ├── SveaInvalidRequestException.php
-        ├── SveaNotFoundException.php
-        ├── SveaRateLimitException.php
-        ├── SveaConnectionException.php
-        └── SignatureVerificationException.php
+src/
+├── SveaClient.php          # Main entry point — lazy service properties
+├── SveaResource.php        # Base response class: ArrayAccess, magic __get, getLastResponse()
+├── Checkout/               # CheckoutService, CheckoutOrder, OrderRow, CheckoutResponse, …
+├── Admin/                  # AdminService, AdminOrderRequest, AdminOrderResponse, CreditRequest, …
+├── Subscriptions/          # SubscriptionService, SubscriptionBuilder, Subscription, EventType
+├── Webhooks/               # Webhook, WebhookService (PSR-7), WebhookEvent, SignatureVerifier
+├── Transport/              # SveaConnector (HMAC auth), SveaResponse, RetryMiddleware
+├── Contracts/              # CheckoutServiceInterface, AdminServiceInterface, SubscriptionServiceInterface
+├── Testing/                # FakeSveaClient, FakeCheckoutService, FakeAdminService, SveaFakeAssertions, …
+├── Exceptions/             # SveaException hierarchy (8 classes)
+├── Support/                # Conditionable trait (when/unless)
+└── Laravel/                # SveaServiceProvider, Svea facade, WebhookService bridge, Events/
 ```
+
+For architecture decisions, internal implementation notes, and contributor setup see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 

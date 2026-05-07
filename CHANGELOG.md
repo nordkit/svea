@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-05-07
+
+### Fixed
+- `NAMING.md` — file structure was significantly stale: `src/Laravel/Facades/Svea.php` corrected to `src/Laravel/Svea.php` (no `Facades/` subdirectory); `SveaServiceProvider` comment no longer references removed Wiretap integration; added missing `DeliverResponse.php`, `CheckoutResponse.php`, all `Checkout/` support classes, `Contracts/` directory, full `Subscriptions/` and `Webhooks/` listings, and `Events/SveaWebhookReceived.php`; `SubscriptionService` comment corrected from `register(), list(), get(), delete()` to `add(), list(), get(), update(), remove(), verify()`
+- `CONTRIBUTING.md` — directory layout diagram updated to show correct `src/Laravel/` structure (`Svea.php`, `WebhookService.php`, `Events/`) and added `Contracts/` to module list; `composer.json` skeleton now includes `phpstan/phpstan: ^2.1` in `require-dev`; Roadmap Phase 11 no longer claims `tests/Integration/` is scaffolded (directory was removed)
+- `README.md` — Package Structure section: fixed root path from `packages/svea/` (old monorepo path) to `src/`; removed stale `src/SveaServiceProvider.php` entry (file lives at `src/Laravel/SveaServiceProvider.php`); condensed the tree to a high-level overview — full annotated structure lives in `CONTRIBUTING.md`
+
 ## [1.0.0] - 2026-05-07
 
 ### Added
@@ -196,6 +203,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Conditionable` trait — `when()` / `unless()` for inline conditional builder chains
 - `RetryMiddleware` — configurable exponential-backoff retry on 429 and 5xx responses
 
-[Unreleased]: https://github.com/nordkit/svea/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/nordkit/svea/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/nordkit/svea/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/nordkit/svea/releases/tag/v1.0.0
 

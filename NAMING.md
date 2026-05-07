@@ -24,28 +24,50 @@ src/
 │   ├── AdminDeliveryRequest.php          # Delivery-scoped: credit(), creditAmount()
 │   ├── AdminOrderRow.php                 # Fluent row builder: name, quantity, unitPrice, vatPercent, etc.
 │   ├── CreditRequest.php                 # Fluent refund builder: rows(), newRow(), send()
+│   ├── DeliverResponse.php               # ->deliveryId(), ->taskReference()
 │   ├── TaskResponse.php                  # Async task resource: reference(), completed(), failed()
 │   └── SveaOrderStatus.php               # Enum: Open, Delivered, Cancelled, Final
 │
 ├── Checkout/
-│   ├── CheckoutService.php               # create(), get(), update()
+│   ├── CheckoutService.php               # create(), get(), update(), cancel()
 │   ├── CheckoutOrder.php                 # Fluent order builder: currency, locale, addRow, merchantSettings
-│   └── OrderRow.php                      # Fluent checkout row builder
+│   ├── CheckoutResponse.php              # ->id(), ->snippet(), ->status(), ->successful()
+│   ├── Cart.php
+│   ├── OrderRow.php                      # Fluent checkout row builder
+│   ├── MerchantSettings.php
+│   ├── PresetValue.php
+│   ├── IdentityFlags.php
+│   ├── ShippingInformation.php
+│   ├── FallbackOption.php
+│   └── Validation.php
+│
+├── Contracts/
+│   ├── AdminServiceInterface.php
+│   ├── CheckoutServiceInterface.php
+│   └── SubscriptionServiceInterface.php
 │
 ├── Exceptions/
+│   ├── SveaException.php
 │   ├── SveaApiException.php              # 4xx/5xx non-specific errors
 │   ├── SveaAuthenticationException.php   # 401 responses
+│   ├── SveaInvalidRequestException.php   # 400 validation errors, carries ->errors[]
 │   ├── SveaConnectionException.php       # Transport-level failures (ConnectException)
 │   ├── SveaNotFoundException.php         # 404 responses
-│   └── SveaRateLimitException.php        # 429 responses
+│   ├── SveaRateLimitException.php        # 429 responses
+│   └── SignatureVerificationException.php
 │
 ├── Laravel/
-│   ├── SveaServiceProvider.php           # Singleton binding, Wiretap integration, config publish
-│   └── Facades/
-│       └── Svea.php                      # Facade → resolves Svea\SveaClient
+│   ├── SveaServiceProvider.php           # Singleton binding, config publish — auto-discovered
+│   ├── Svea.php                          # Facade → SveaClient; static assertXxx() proxies for testing
+│   ├── WebhookService.php                # Illuminate\Http\Request → Webhook::constructEvent() bridge
+│   └── Events/
+│       └── SveaWebhookReceived.php       # Dispatchable event wrapping WebhookEvent
 │
 ├── Subscriptions/
-│   └── SubscriptionService.php           # register(), list(), get(), delete()
+│   ├── SubscriptionService.php           # add(), list(), get(), update(), remove(), verify()
+│   ├── SubscriptionBuilder.php           # ->on()->notifyAt()->register()
+│   ├── Subscription.php                  # ->id(), ->events(), ->callbackUrl(), ->createdAt(), ->isVerified()
+│   └── EventType.php                     # Enum — all 10 subscription event types
 │
 ├── Support/
 │   └── Conditionable.php                 # Trait: when() / unless() for builder chains
@@ -66,7 +88,10 @@ src/
 │   └── RetryMiddleware.php               # Exponential backoff on 429 / 5xx
 │
 └── Webhooks/
-    └── WebhookService.php                # verify(string $payload, string $signature): bool
+    ├── Webhook.php                       # static constructEvent() — pure static, no framework deps
+    ├── WebhookService.php                # ->fromRequest(RequestInterface) — PSR-7 aware
+    ├── WebhookEvent.php                  # ->type(), ->orderId(), ->deliveryId(), ->occurredAt()
+    └── SignatureVerifier.php             # Pure HMAC-SHA256 logic — fully unit-testable
 ```
 
 ## Naming Decisions Already Made
