@@ -41,6 +41,28 @@ jobs:
       - name: Run tests
         run: vendor/bin/pest --compact
 
+  php82-compat:
+    runs-on: ubuntu-latest
+
+    name: PHP 8.2 — compatibility (no-dev)
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: mbstring
+          coverage: none
+
+      - name: Install production dependencies only
+        run: composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+
+      - name: Verify autoloader
+        run: php -r "require 'vendor/autoload.php'; echo 'OK' . PHP_EOL;"
+
   phpstan:
     runs-on: ubuntu-latest
 

@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
-- Minimum PHP version bumped to `^8.3` — `pestphp/pest ^4.0` requires PHP 8.3+; PHP 8.2 removed from CI test matrix and PHPStan/Pint jobs updated accordingly; README requirements table and badge updated
+- CI — PHP 8.2 test matrix entry replaced with a dedicated `php82-compat` job that installs production dependencies only (`--no-dev`) and verifies the autoloader; the test suite (Pest 4) runs on PHP 8.3 and 8.4 only since `pestphp/pest ^4.0` requires PHP `^8.3`; the package runtime requirement remains `^8.2`
 
 ## [1.0.0] - 2026-05-07
 

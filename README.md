@@ -2,7 +2,7 @@
 
 A ground-up PHP SDK for Svea's APIs: **Checkout**, **Payment Admin**, **Webhook Subscriptions**, and **inbound Webhook verification** — with a fluent, expressive API, a full Laravel integration, and a first-class testing layer.
 
-![PHP](https://img.shields.io/badge/PHP-8.3%2B-blue)
+![PHP](https://img.shields.io/badge/PHP-8.2%2B-blue)
 ![Laravel](https://img.shields.io/badge/Laravel-11%2B-red)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -35,7 +35,7 @@ A ground-up PHP SDK for Svea's APIs: **Checkout**, **Payment Admin**, **Webhook 
 
 | Dependency | Version |
 |---|---|
-| PHP | ^8.3 |
+| PHP | ^8.2 |
 | `guzzlehttp/guzzle` | ^7.8 |
 | `illuminate/support` *(optional)* | ^11.0 \| ^12.0 — required for the Laravel facade and service provider |
 
