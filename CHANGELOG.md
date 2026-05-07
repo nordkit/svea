@@ -7,9 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-- CI — PHP 8.2 test matrix entry replaced with a dedicated `php82-compat` job that installs production dependencies only (`--no-dev`) and verifies the autoloader; the test suite (Pest 4) runs on PHP 8.3 and 8.4 only since `pestphp/pest ^4.0` requires PHP `^8.3`; the package runtime requirement remains `^8.2`
-
 ## [1.0.0] - 2026-05-07
 
 ### Added
@@ -22,7 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README — cross-reference added between Subscriptions and "Poll a task" (disambiguation table)
 
 ### Fixed
-- `phpunit.xml` — `Feature` testsuite pointed at non-existent `tests/Feature/`; `vendor/bin/pest --compact` was exiting with code 2 and running zero tests; replaced with `Integration` testsuite pointing at `tests/Integration/`
+- `phpunit.xml` and `tests/Pest.php` — `Integration` testsuite pointed at non-existent `tests/Integration/`; removed from both config files; `vendor/bin/pest --compact` now exits cleanly
+- `phpunit.xml` — `Feature` testsuite pointed at non-existent `tests/Feature/`; replaced with `Integration` testsuite pointing at `tests/Integration/`
 - `SveaResource` — added `@implements ArrayAccess<string, mixed>` to satisfy PHPStan generics check
 - `SveaResource::make()`, `AdminOrderRow::make()`, `CheckoutOrder::make()`, `OrderRow::make()` — added `@phpstan-ignore new.static` (return type is `static`, required for the factory-on-subclass pattern)
 - `FakeAdminOrderRequest::$idempotencyKey` — added `@phpstan-ignore property.onlyWritten` with explanatory comment (key is intentionally stored but not forwarded — no real HTTP in the fake)
