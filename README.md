@@ -86,6 +86,8 @@ php artisan vendor:publish --tag=svea-config
 
 ## Quick Start
 
+> 💡 **Prefer learning by example?** Check out [`nordkit/svea-example-laravel`](https://github.com/nordkit/svea-example-laravel) — a minimal Laravel 13 app demonstrating the full **cart → checkout → webhook** flow, with a feature test suite using `Svea::fake()`.
+
 ### Create a checkout order
 
 All numeric values follow Svea's **minor-unit convention**:
