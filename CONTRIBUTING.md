@@ -43,8 +43,17 @@ The `sveaekonomi/checkout` v1.7.1 package that preceded this SDK has fundamental
 
 ## Development Setup
 
+### Requirements
+
+| Tool | Version |
+|---|---|
+| PHP (dev / CI) | **^8.3** — required by `pestphp/pest ^4.0` |
+| PHP (runtime) | ^8.2 — the package itself has no PHP 8.3-only features |
+
+> **PHP 8.2 users:** you can `composer require nordkit/svea` without issue — Pest is a `require-dev` dependency and is never installed as a transitive dependency in your app. To contribute or run the test suite locally, you need PHP 8.3+.
+
 ```bash
-# Install dependencies
+# Install dependencies (requires PHP 8.3+)
 composer install
 
 # Run tests
