@@ -1,0 +1,90 @@
+name: 🐛 Bug report
+description: Something in the SDK doesn't behave as documented.
+title: "[Bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report. Please fill out the sections below — the more concrete the reproduction, the faster we can fix it.
+
+        > 🔒 **Security issue?** Please use [private security advisories](https://github.com/nordkit/svea/security/advisories/new) instead.
+
+  - type: input
+    id: package-version
+    attributes:
+      label: Package version
+      description: Output of `composer show nordkit/svea | grep versions`.
+      placeholder: "1.0.1"
+    validations:
+      required: true
+
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP version
+      placeholder: "8.3.10"
+    validations:
+      required: true
+
+  - type: input
+    id: laravel-version
+    attributes:
+      label: Laravel version (if applicable)
+      placeholder: "11.30 — or N/A for standalone"
+
+  - type: dropdown
+    id: api-surface
+    attributes:
+      label: Which API surface is affected?
+      multiple: true
+      options:
+        - Checkout
+        - Payment Admin
+        - Subscriptions
+        - Webhook verification
+        - Laravel integration
+        - Testing / fakes
+        - Transport / HTTP
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What's the bug?
+      description: Clear, concise description of what's going wrong.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: A short PHP snippet that reproduces the issue. Prefer using `Svea::fake()` or `MockHandler` so it runs without credentials.
+      render: php
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: Include the full exception message, status code, and stack trace if applicable.
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Logs, screenshots, related issues, environment details (queue driver, OS, etc.).
+

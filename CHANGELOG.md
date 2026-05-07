@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-05-08
+
+### Added
+- `docs/` — VitePress documentation site scaffold for **https://nordkit.github.io/svea/**:
+  - `docs/.vitepress/config.ts` — site config (nav, sidebar, sitemap, OG meta, local search, edit-on-GitHub, last-updated, base path `/svea/`)
+  - `docs/index.md` — home page with branded hero and feature grid (full API coverage, fluent & strict, first-class testing, production transport, framework-agnostic core, end-to-end docs)
+  - `docs/guide/` — 11 narrative guides: getting-started, installation, quick-start, configuration, authentication, laravel, standalone, testing, error-handling, retries-idempotency, middleware
+  - `docs/api/` — 5 reference pages: checkout, admin, subscriptions, webhooks, response-objects
+  - `docs/public/logo.svg` — placeholder hero/favicon logo (Nordic blue gradient)
+  - `docs/package.json` — VitePress 1.6, `dev`/`build`/`preview` scripts; `docs/.gitignore` for `node_modules/` and build output
+  - `docs/README.md` — local development, structure, deployment, and custom-domain instructions
+- `.github/workflows/docs.yml` — GitHub Actions workflow that builds and deploys the docs to GitHub Pages on every push to `main` touching `docs/**` (Node 20, npm cache, artifact upload + Pages deploy)
+- `.gitattributes` — `docs/ export-ignore` so the docs source stays in the GitHub repo but ships out of the Composer dist tarball
+- Laravel 13 support — README badge, requirements table, and `composer.json` `suggest` updated; `orchestra/testbench` constraint widened to `^10.0 || ^11.0` to cover testing on both Laravel 12 and 13
+- README — link to the official Svea API documentation ([paymentsdocs.svea.com](https://paymentsdocs.svea.com/)) at the top of the file
+- README — replaced static badge row with live Packagist version, total downloads, GitHub Actions test status, PHPStan level 6, PHP version (from `composer.json`), Laravel 11/12, and license badges
+- README — new "At a glance" feature matrix summarising all supported capabilities (Checkout, Admin, Subscriptions, Webhooks, Laravel, fakes, idempotency, retries, async tasks, conditionable, typed exceptions, PHP 8.2–8.4)
+- `composer.json` — added `keywords` array (`svea`, `svea-checkout`, `svea-payments`, `payments`, `payment-gateway`, `checkout`, `ecommerce`, `laravel`, `laravel-package`, `nordic`, `sweden`, `webhooks`, `sdk`, `php-sdk`) for Packagist discoverability
+- `.github/FUNDING.yml` — enables the GitHub Sponsors button on the repo (`nordkit` org)
+- `.github/ISSUE_TEMPLATE/bug_report.yml` — structured bug report form (version, PHP/Laravel, API surface, reproduction, expected/actual)
+- `.github/ISSUE_TEMPLATE/feature_request.yml` — structured feature request form (problem, proposed API, alternatives, API surface, Svea docs link)
+- `.github/ISSUE_TEMPLATE/config.yml` — disables blank issues; routes questions to Discussions, security to private advisories, and Svea-API questions to the official docs
+- `.github/PULL_REQUEST_TEMPLATE.md` — PR checklist (Pint, Pest, PHPStan, CHANGELOG, README) with type/API-surface tagging
+
 ## [1.0.1] - 2026-05-07
 
 ### Fixed
@@ -203,7 +227,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Conditionable` trait — `when()` / `unless()` for inline conditional builder chains
 - `RetryMiddleware` — configurable exponential-backoff retry on 429 and 5xx responses
 
-[Unreleased]: https://github.com/nordkit/svea/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/nordkit/svea/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/nordkit/svea/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/nordkit/svea/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/nordkit/svea/releases/tag/v1.0.0
 

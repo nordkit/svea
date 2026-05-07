@@ -11,6 +11,7 @@ RELEASING.md export-ignore
 RELEASE_PROMPT.md export-ignore
 VALIDATE_PROMPT.md export-ignore
 EXTRACT_PROMPT.md export-ignore
+docs/ export-ignore
 svea-bug-report.md export-ignore
 tests/ export-ignore
 

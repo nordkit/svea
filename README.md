@@ -2,9 +2,36 @@
 
 A ground-up PHP SDK for Svea's APIs: **Checkout**, **Payment Admin**, **Webhook Subscriptions**, and **inbound Webhook verification** — with a fluent, expressive API, a full Laravel integration, and a first-class testing layer.
 
-![PHP](https://img.shields.io/badge/PHP-8.2%2B-blue)
-![Laravel](https://img.shields.io/badge/Laravel-11%2B-red)
-![License](https://img.shields.io/badge/license-MIT-green)
+[![Packagist Version](https://img.shields.io/packagist/v/nordkit/svea.svg?style=flat-square)](https://packagist.org/packages/nordkit/svea)
+[![Total Downloads](https://img.shields.io/packagist/dt/nordkit/svea.svg?style=flat-square)](https://packagist.org/packages/nordkit/svea)
+[![Tests](https://img.shields.io/github/actions/workflow/status/nordkit/svea/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/nordkit/svea/actions/workflows/tests.yml)
+[![PHPStan](https://img.shields.io/badge/PHPStan-level%206-brightgreen.svg?style=flat-square)](phpstan.neon)
+[![PHP Version](https://img.shields.io/packagist/php-v/nordkit/svea.svg?style=flat-square)](composer.json)
+[![Laravel](https://img.shields.io/badge/Laravel-11%20%7C%2012%20%7C%2013-red.svg?style=flat-square)](composer.json)
+[![License](https://img.shields.io/packagist/l/nordkit/svea.svg?style=flat-square)](LICENSE.md)
+
+> 📖 **Official Svea API documentation:** [paymentsdocs.svea.com](https://paymentsdocs.svea.com/)
+
+---
+
+## At a glance
+
+| Feature | Status |
+|---|---|
+| **Checkout API** — create, get, update, cancel orders | ✅ |
+| **Payment Admin API** — deliver, cancel, credit, modify rows | ✅ |
+| **Webhook Subscriptions** — full CRUD + verification | ✅ |
+| **Inbound Webhook verification** — HMAC-SHA256, timing-safe | ✅ |
+| **Laravel integration** — service provider, facade, Artisan commands | ✅ |
+| **Test doubles** — `Svea::fake()` with assertion helpers (Http::fake-style) | ✅ |
+| **Idempotency keys** — safe queue retries on Admin operations | ✅ |
+| **Retries** — opt-in exponential backoff on 429 / 5xx | ✅ |
+| **Async task polling** — typed `TaskResponse` for HTTP 202 operations | ✅ |
+| **Conditionable** — `when()` / `unless()` for fluent branching | ✅ |
+| **Typed exceptions** — `SveaApiException` hierarchy with status code & body | ✅ |
+| **Strict types & `final readonly` value objects** — PHPStan level 6, zero errors | ✅ |
+| **PHP support** — 8.2, 8.3, 8.4 (8.5 experimental) | ✅ |
+| **Framework-agnostic core** — Laravel optional, runs anywhere | ✅ |
 
 ---
 
@@ -37,7 +64,7 @@ A ground-up PHP SDK for Svea's APIs: **Checkout**, **Payment Admin**, **Webhook 
 |---|---|
 | PHP | ^8.2 |
 | `guzzlehttp/guzzle` | ^7.8 |
-| `illuminate/support` *(optional)* | ^11.0 \| ^12.0 — required for the Laravel facade and service provider |
+| `illuminate/support` *(optional)* | ^11.0 \| ^12.0 \| ^13.0 — required for the Laravel facade and service provider |
 
 ---
 

@@ -8,3 +8,7 @@ coverage/
 .phpunit.result.cache
 *.log
 .vscode/
+
+# Local-only — promotion / marketing notes, not part of the public repo
+PROMOTION.md
+

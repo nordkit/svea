@@ -1,0 +1,16 @@
+{
+  "name": "svea-docs",
+  "version": "0.0.0",
+  "description": "Documentation site for nordkit/svea",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.0"
+  }
+}
+

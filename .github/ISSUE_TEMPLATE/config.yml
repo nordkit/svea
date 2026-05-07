@@ -1,0 +1,12 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Question / Discussion
+    url: https://github.com/nordkit/svea/discussions
+    about: Ask "how do I…?" or share an integration pattern in Discussions instead of opening an issue.
+  - name: 🔒 Security vulnerability
+    url: https://github.com/nordkit/svea/security/advisories/new
+    about: Report security issues privately via GitHub Security Advisories — never in a public issue.
+  - name: 📖 Official Svea API documentation
+    url: https://paymentsdocs.svea.com/
+    about: For questions about the underlying Svea API behaviour itself, not the SDK.
+
