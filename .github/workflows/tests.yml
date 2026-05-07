@@ -58,7 +58,7 @@ jobs:
           coverage: none
 
       - name: Install production dependencies only
-        run: composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+        run: composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --ignore-platform-req=php
 
       - name: Verify autoloader
         run: php -r "require 'vendor/autoload.php'; echo 'OK' . PHP_EOL;"
