@@ -82,6 +82,24 @@ $order = Svea::checkout()->create(function (CheckoutOrder $order) use ($cart) {
 
 Both forms produce identical HTTP requests. Mix freely across `create()`, `update()`, and tests.
 
+### Currencies & locales
+
+Svea Checkout supports several Nordic markets. Set `currency()`, `locale()`, and `countryCode()` together so the checkout matches the merchant market:
+
+```php
+// Sweden
+CheckoutOrder::make()->currency('SEK')->locale('sv-SE')->countryCode('SE');
+
+// Norway
+CheckoutOrder::make()->currency('NOK')->locale('nn-NO')->countryCode('NO');
+
+// Denmark
+CheckoutOrder::make()->currency('DKK')->locale('da-DK')->countryCode('DK');
+
+// Finland
+CheckoutOrder::make()->currency('EUR')->locale('fi-FI')->countryCode('FI');
+```
+
 ## Conditional builders — `when()` / `unless()`
 
 Every builder (`CheckoutOrder`, `MerchantSettings`, `OrderRow`, `AdminOrderRequest`, `AdminOrderRow`, `CreditRequest`) uses the `Conditionable` trait. Inline branching without breaking the chain:
@@ -122,6 +140,3 @@ $order->getLastResponse()->statusCode;
 - **`OrderRow`** — `sku()`, `name()`, `quantity()`, `unitPrice()`, `vatPercent()`, `discountPercent()`, `unit()`
 
 All builders use the **minor-unit** convention (`100` = 1 unit, `2500` = 25%).
-
-
-
