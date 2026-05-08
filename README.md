@@ -96,6 +96,15 @@ All numeric values follow Svea's **minor-unit convention**:
 - `vatPercent` — `2500` = 25%, `1900` = 19%
 - `discountPercent` — `1000` = 10%
 
+Common Nordic checkout defaults:
+
+| Market | Currency | Locale | Country code |
+|---|---|---|---|
+| Sweden | `SEK` | `sv-SE` | `SE` |
+| Norway | `NOK` | `nn-NO` | `NO` |
+| Denmark | `DKK` | `da-DK` | `DK` |
+| Finland | `EUR` | `fi-FI` | `FI` |
+
 ```php
 use Svea\Checkout\Cart;
 use Svea\Checkout\CheckoutOrder;
