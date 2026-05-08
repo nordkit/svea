@@ -75,6 +75,12 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Migration',
+          items: [
+            { text: 'From sveaekonomi/checkout', link: '/guide/migration-from-official-sdk' },
+          ],
+        },
+        {
           text: 'Advanced',
           items: [
             { text: 'Testing & Fakes', link: '/guide/testing' },
@@ -119,4 +125,3 @@ export default defineConfig({
     },
   },
 })
-
