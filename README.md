@@ -980,7 +980,7 @@ src/
 ├── Testing/                # FakeSveaClient, FakeCheckoutService, FakeAdminService, SveaFakeAssertions, …
 ├── Exceptions/             # SveaException hierarchy (8 classes)
 ├── Support/                # Conditionable trait (when/unless)
-└── Laravel/                # SveaServiceProvider, Svea facade, WebhookService bridge, Events/
+└── Laravel/                # SveaServiceProvider, Svea facade, WebhookService bridge, Commands/, Events/
 ```
 
 For architecture decisions, internal implementation notes, and contributor setup see [CONTRIBUTING.md](CONTRIBUTING.md).

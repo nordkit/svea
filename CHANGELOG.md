@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `src/Laravel/Commands/` — six Artisan commands for managing Svea webhook subscriptions, ported from the original `freightseeker-api-v2` codebase:
+  - `svea:subscription:add` — register a new subscription with optional `--url`, `--events`, and `--no-verify` flags
+  - `svea:subscription:list` — list all registered subscriptions in a table
+  - `svea:subscription:get {id}` — show details of a single subscription
+  - `svea:subscription:verify {id}` — send a verification Ping to a subscription's callback URL
+  - `svea:subscription:update {id}` — update URL and/or events with optional `--verify` flag
+  - `svea:subscription:remove {id}` — remove a subscription with `--force` to skip confirmation
+- `SveaServiceProvider` — commands are now registered automatically when running in the console
+- `tests/Unit/Laravel/Commands/SveaSubscriptionCommandsTest.php` — 11 Pest tests covering all six commands
+
 ## [1.1.0] - 2026-05-08
 
 ### Added
@@ -237,4 +248,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.1.0]: https://github.com/nordkit/svea/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/nordkit/svea/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/nordkit/svea/releases/tag/v1.0.0
-

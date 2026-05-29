@@ -5,6 +5,12 @@ declare(strict_types=1);
 namespace Svea\Laravel;
 
 use Illuminate\Support\ServiceProvider;
+use Svea\Laravel\Commands\SveaSubscriptionAddCommand;
+use Svea\Laravel\Commands\SveaSubscriptionGetCommand;
+use Svea\Laravel\Commands\SveaSubscriptionListCommand;
+use Svea\Laravel\Commands\SveaSubscriptionRemoveCommand;
+use Svea\Laravel\Commands\SveaSubscriptionUpdateCommand;
+use Svea\Laravel\Commands\SveaSubscriptionVerifyCommand;
 use Svea\SveaClient;
 
 /**
@@ -75,6 +81,15 @@ class SveaServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../../config/svea.php' => config_path('svea.php'),
             ], 'svea-config');
+
+            $this->commands([
+                SveaSubscriptionAddCommand::class,
+                SveaSubscriptionGetCommand::class,
+                SveaSubscriptionListCommand::class,
+                SveaSubscriptionRemoveCommand::class,
+                SveaSubscriptionUpdateCommand::class,
+                SveaSubscriptionVerifyCommand::class,
+            ]);
         }
     }
 }
