@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-05-29
+
 ### Added
 - `src/Laravel/Commands/` — six Artisan commands for managing Svea webhook subscriptions, ported from the original `freightseeker-api-v2` codebase:
   - `svea:subscription:add` — register a new subscription with optional `--url`, `--events`, and `--no-verify` flags
@@ -17,6 +19,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `svea:subscription:remove {id}` — remove a subscription with `--force` to skip confirmation
 - `SveaServiceProvider` — commands are now registered automatically when running in the console
 - `tests/Unit/Laravel/Commands/SveaSubscriptionCommandsTest.php` — 11 Pest tests covering all six commands
+- `docs/guide/migration-from-official-sdk.md` — comprehensive migration guide from `sveaekonomi/checkout` with side-by-side code examples for checkout, admin, credit, cancel, and webhook flows (community contribution by @looooown2006)
+- `docs/.vitepress/config.ts` — new "Migration" sidebar section linking to the migration guide
+- `docs/api/checkout.md` — "Currencies & locales" section with PHP examples for all four Nordic markets (community contribution by @looooown2006)
+- `README.md` — "Common Nordic checkout defaults" table (SEK/NOK/DKK/EUR with locales and country codes) (community contribution by @looooown2006)
+- `docs/guide/quick-start.md` — cross-link to `nordkit/svea-example-laravel` demo project
+
+### Fixed
+- `docs/guide/fluent-builders.md` — corrected minor-unit documentation: `OrderRow` and `AdminOrderRow` both use raw minor-unit values with no SDK-level ×100 conversion (community contribution by @looooown2006)
+- `docs/guide/fluent-builders.md` — fixed broken internal links (`./testing` → `./testing.md`, `../api/checkout` → `../api/checkout.md`, `../api/admin` → `../api/admin.md`)
 
 ## [1.1.0] - 2026-05-08
 
@@ -244,7 +255,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Conditionable` trait — `when()` / `unless()` for inline conditional builder chains
 - `RetryMiddleware` — configurable exponential-backoff retry on 429 and 5xx responses
 
-[Unreleased]: https://github.com/nordkit/svea/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/nordkit/svea/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/nordkit/svea/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/nordkit/svea/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/nordkit/svea/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/nordkit/svea/releases/tag/v1.0.0
