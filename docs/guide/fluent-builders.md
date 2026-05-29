@@ -96,16 +96,15 @@ Svea::admin()
 
 ## Both styles in tests
 
-Inside `Svea::fake()` callbacks the builders are passed pre-constructed, so test code typically uses the fluent style. See the [Testing & Fakes guide](./testing).
+Inside `Svea::fake()` callbacks the builders are passed pre-constructed, so test code typically uses the fluent style. See the [Testing & Fakes guide](./testing.md).
 
 ## When the styles diverge
 
 Most builders cover both styles 1:1. A few details to know:
 
-- **`OrderRow` (Checkout)** applies an SDK-level × 100 conversion for `quantity`, `vatPercent`, and `discountPercent`. Pass human values (`1`, `25`, `10`).
-- **`AdminOrderRow` (Admin)** does *not* convert — pass already-scaled minor-unit values (`100`, `2500`, `1000`).
+- **`OrderRow` (Checkout)** uses Svea's native minor-unit format. Pass already-scaled values (`100` = 1 item, `2500` = 25%, `1000` = 10%).
+- **`AdminOrderRow` (Admin)** uses the same minor-unit format for row mutations. Pass already-scaled values (`100`, `2500`, `1000`).
 - **`replaceOrderRows()`** is variadic: pass one closure per replacement row, no array wrapping needed.
 - **`CreditRequest`** chains state — call `rows([...])` *and/or* one or more `newRow(...)` callbacks before `->send()`.
 
-See the [Checkout](../api/checkout) and [Admin](../api/admin) reference pages for surface-specific examples.
-
+See the [Checkout](../api/checkout.md) and [Admin](../api/admin.md) reference pages for surface-specific examples.
