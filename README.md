@@ -96,15 +96,6 @@ All numeric values follow Svea's **minor-unit convention**:
 - `vatPercent` — `2500` = 25%, `1900` = 19%
 - `discountPercent` — `1000` = 10%
 
-Common Nordic checkout defaults:
-
-| Market | Currency | Locale | Country code |
-|---|---|---|---|
-| Sweden | `SEK` | `sv-SE` | `SE` |
-| Norway | `NOK` | `nn-NO` | `NO` |
-| Denmark | `DKK` | `da-DK` | `DK` |
-| Finland | `EUR` | `fi-FI` | `FI` |
-
 ```php
 use Svea\Checkout\Cart;
 use Svea\Checkout\CheckoutOrder;
@@ -141,9 +132,9 @@ Great for composable builds and `when()` branches:
 $order = Svea::checkout()->create(function (CheckoutOrder $order) use ($cart) {
     $order
         ->currency('SEK')
-        ->locale('sv-SE')
         ->countryCode('SE')
-        ->clientOrderNumber($cart->order_number)
+        ->locale('sv-SE')
+        ->clientOrderNumber($cart->reference)
         ->merchantSettings(fn (MerchantSettings $s) => $s
             ->pushUri(route('webhooks.svea'))
             ->termsUri(route('terms'))
@@ -396,9 +387,26 @@ php artisan svea:subscription:remove {id} --force
 
 ### Checkout
 
+#### Supported markets
+
+Every checkout order requires a matching `countryCode`, `currency`, and `locale`. These three parameters identify the merchant market and determine which payment methods and checkout UI language Svea presents to the customer.
+
+| Market | Country code | Currency | Locale |
+|---|---|---|---|
+| Sweden | `SE` | `SEK` | `sv-SE` |
+| Norway | `NO` | `NOK` | `nn-NO` |
+| Denmark | `DK` | `DKK` | `da-DK` |
+| Finland | `FI` | `EUR` | `fi-FI` |
+
+Additional supported locales for international checkouts: `de-DE`, `en-US`.
+
 #### Create
 
-All numeric values follow Svea's **minor-unit convention**: `quantity` (`100` = 1 unit), `unitPrice` (minor currency, e.g. `29900` = 299.00 SEK), `vatPercent` (`2500` = 25%), `discountPercent` (`1000` = 10%).
+All numeric values follow Svea's **minor-unit convention**:
+- `quantity` — `100` = 1 unit, `300` = 3 units
+- `unitPrice` — `29900` = 299.00 SEK (minor currency, e.g. öre)
+- `vatPercent` — `2500` = 25%, `1900` = 19%
+- `discountPercent` — `1000` = 10%
 
 **Named constructor style** — best when all data is available upfront:
 
@@ -421,14 +429,13 @@ $order = Svea::checkout()->create(new CheckoutOrder(
     ),
     cart: new Cart([
         new OrderRow(quantity: 100, unitPrice: 29900, vatPercent: 2500, sku: 'TSHIRT-BLK-M', name: 'T-Shirt Black M'),
+        new OrderRow(quantity: 200, unitPrice: 89900, vatPercent: 2500, sku: 'SNEAKER-WHT-42', name: 'Sneakers White 42'),
     ]),
 ));
 
-$order->id();                          // '12345678'
-$order->snippet();                     // '<div>...</div>' — embed in checkout page
-$order->status();                      // 'Created' | 'Final' | 'Cancelled'
-$order->successful();                  // bool
-$order->getLastResponse()->statusCode; // 201
+$order->id();        // '12345678' — store this as your Svea order ID
+$order->snippet();   // '<script>...</script>' — embed in your checkout page
+$order->status();    // 'Created' | 'Final' | 'Cancelled'
 ```
 
 **Fluent callback style** — better for loops, conditional rows, and composable builds:
@@ -461,8 +468,6 @@ $order = Svea::checkout()->create(function (CheckoutOrder $order) use ($cart) {
     ));
 });
 ```
-
-**Supported locales:** `sv-SE`, `da-DK`, `de-DE`, `en-US`, `fi-FI`, `nn-NO`.
 
 **Optional fields** — chain on either style:
 

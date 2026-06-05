@@ -15,6 +15,19 @@ Until the docs site grows, the canonical reference for every field, optional fla
 | `Svea::checkout()->update($orderId, $order)` | `CheckoutResponse` | Same input shape as `create()`. |
 | `Svea::checkout()->cancel($orderId)` | `void` | |
 
+## Supported markets
+
+Every checkout order requires a matching `countryCode`, `currency`, and `locale`. These three parameters identify the merchant market and determine which payment methods and checkout UI language Svea presents to the customer.
+
+| Market | Country code | Currency | Locale |
+|---|---|---|---|
+| Sweden | `SE` | `SEK` | `sv-SE` |
+| Norway | `NO` | `NOK` | `nn-NO` |
+| Denmark | `DK` | `DKK` | `da-DK` |
+| Finland | `FI` | `EUR` | `fi-FI` |
+
+Additional supported locales for international checkouts: `de-DE`, `en-US`.
+
 ## Two ways to build a request
 
 Every method that accepts a `CheckoutOrder` supports two equivalent input styles. Use whichever fits the situation.
@@ -81,24 +94,6 @@ $order = Svea::checkout()->create(function (CheckoutOrder $order) use ($cart) {
 ```
 
 Both forms produce identical HTTP requests. Mix freely across `create()`, `update()`, and tests.
-
-### Currencies & locales
-
-Svea Checkout supports several Nordic markets. Set `currency()`, `locale()`, and `countryCode()` together so the checkout matches the merchant market:
-
-```php
-// Sweden
-CheckoutOrder::make()->currency('SEK')->locale('sv-SE')->countryCode('SE');
-
-// Norway
-CheckoutOrder::make()->currency('NOK')->locale('nn-NO')->countryCode('NO');
-
-// Denmark
-CheckoutOrder::make()->currency('DKK')->locale('da-DK')->countryCode('DK');
-
-// Finland
-CheckoutOrder::make()->currency('EUR')->locale('fi-FI')->countryCode('FI');
-```
 
 ## Conditional builders — `when()` / `unless()`
 

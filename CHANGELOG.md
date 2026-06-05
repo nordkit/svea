@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-06-05
+
+### Changed
+- `README.md` — renamed "Common Nordic checkout defaults" to "Supported markets" and moved the table from inline in the Checkout Create section to its own subsection under Checkout API Reference; rewrote the description to accurately reflect that `countryCode`, `currency`, and `locale` are required parameters that identify the merchant market — not defaults; added note about additional international locales (`de-DE`, `en-US`)
+- `docs/api/checkout.md` — renamed "Currencies & locales" to "Supported markets" and moved the section from between the builder examples and conditional builders to directly after the Methods table; replaced PHP code examples with a consistent reference table matching the README; added note about additional international locales
+
 ## [1.2.0] - 2026-05-29
 
 ### Added
@@ -255,7 +261,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Conditionable` trait — `when()` / `unless()` for inline conditional builder chains
 - `RetryMiddleware` — configurable exponential-backoff retry on 429 and 5xx responses
 
-[Unreleased]: https://github.com/nordkit/svea/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/nordkit/svea/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/nordkit/svea/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/nordkit/svea/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/nordkit/svea/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/nordkit/svea/compare/v1.0.0...v1.0.1
